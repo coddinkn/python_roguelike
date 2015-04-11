@@ -6,6 +6,7 @@ class Player:
 		self.c = '@'
 		self.oldX = x
 		self.oldY = y
+		self.aiMovable = False
 
 	def move(self, x, y):
 		self.oldX = self.x

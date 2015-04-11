@@ -1,4 +1,5 @@
 import random
+from enemy import Enemy
 
 def generate(width, height, grid):
 	random.seed()
@@ -103,13 +104,17 @@ class Level:
 		self.downX = stairPos[2]
 		self.downY = stairPos[3]
 		self.entityList = []
+		random.seed()	
+		numberOfEnemies = int(random.random() * 10)
+		for i in range(numberOfEnemies):
+			self.addEntity(Enemy(int(random.random() * width), int(random.random() * height)))
 
 	def addEntity(self, entity):
-		self.entityList.append(entity)
 		x = entity.x
 		y = entity.y
 		if((x >= 0 and x < self.width) and (y >= 0 and y < self.height)):
 			if(self.grid[x][y] != ' '):
+				self.entityList.append(entity)
 				self.entityGrid[x][y] = entity.c
 
 	def removeEntityAt(self, x, y):
@@ -124,19 +129,23 @@ class Level:
 		for entity in self.entityList:
 			x = entity.x
 			y = entity.y
+			if entity.aiMovable:
+				entity.move()
 			if((x >= 0 and x < self.width) and (y >= 0 and y < self.height)):
 				if(self.grid[x][y] != ' '):
 					self.entityGrid[x][y] = entity.c
 				else:
 					entity.x = entity.oldX
 					entity.y = entity.oldY
-					self.entityGrid[entity.x][entity.y] = entity.c
-					self.screen.addstr(self.height + 1, 0, "you cant go that way silly")
+					if entity.aiMovable == False:	
+						self.entityGrid[entity.x][entity.y] = entity.c
+						self.screen.addstr(self.height + 1, 0, "you cant go that way silly")
 			else:
 				entity.x = entity.oldX
 				entity.y = entity.oldY
-				self.entityGrid[entity.x][entity.y] = entity.c
-				self.screen.addstr(self.height + 1, 0, "you cant go that way silly")
+				if entity.aiMovable == False:
+					self.entityGrid[entity.x][entity.y] = entity.c
+					self.screen.addstr(self.height + 1, 0, "you cant go that way silly")
 	
 	def render(self):
 		self.update()
