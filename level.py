@@ -4,7 +4,7 @@ class Level:
 		self.width = width
 		self.height = height
 		self.screen = screen
-		self.grid = [ [ '*' for i in range(height) ] for j in range(width) ]
+		self.grid = [ [ ' ' for i in range(height) ] for j in range(width) ]
 	
 	def render(self):
 		self.screen.clear()

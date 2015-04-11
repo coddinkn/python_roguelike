@@ -1,7 +1,7 @@
 #! /bin/python
 
 import curses
-from level import Level
+from dungeon import Dungeon
 
 stdscr = curses.initscr()
 curses.noecho()
@@ -9,14 +9,16 @@ curses.curs_set(0)
 stdscr.keypad(1)
 isRunning = True
 
-test = Level(20, 5, stdscr)
+caves = Dungeon(60, 6, 3, stdscr)
 
 try:
 
 	while isRunning:
-		test.render()	
+		caves.render()		
 		event = stdscr.getch()
 		if event == ord('q'): break
+		if event == ord('='): caves.ascend()
+		if event == ord('-'): caves.descend()
 
 	curses.endwin()
 
