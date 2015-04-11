@@ -131,14 +131,15 @@ class Level:
 					entity.x = entity.oldX
 					entity.y = entity.oldY
 					self.entityGrid[entity.x][entity.y] = entity.c
+					self.screen.addstr(self.height + 1, 0, "you cant go that way silly")
 			else:
 				entity.x = entity.oldX
 				entity.y = entity.oldY
 				self.entityGrid[entity.x][entity.y] = entity.c
-
+				self.screen.addstr(self.height + 1, 0, "you cant go that way silly")
+	
 	def render(self):
 		self.update()
-		self.screen.clear()
 		for x in range(self.width):
 			for y in range(self.height):
 				self.screen.addch(y, x, self.grid[x][y])
