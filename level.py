@@ -112,6 +112,11 @@ class Level:
 			if(self.grid[x][y] != ' '):
 				self.entityGrid[x][y] = entity.c
 
+	def removeEntityAt(self, x, y):
+		for entity in self.entityList:
+			if(entity.x == x and entity.y == y):
+				self.entityList.remove(entity)
+
 	def update(self):
 		for x in range(self.width):
 			for y in range(self.height):
@@ -122,6 +127,14 @@ class Level:
 			if((x >= 0 and x < self.width) and (y >= 0 and y < self.height)):
 				if(self.grid[x][y] != ' '):
 					self.entityGrid[x][y] = entity.c
+				else:
+					entity.x = entity.oldX
+					entity.y = entity.oldY
+					self.entityGrid[entity.x][entity.y] = entity.c
+			else:
+				entity.x = entity.oldX
+				entity.y = entity.oldY
+				self.entityGrid[entity.x][entity.y] = entity.c
 
 	def render(self):
 		self.update()

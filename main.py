@@ -15,8 +15,8 @@ while isRunning:
 	caves.render()		
 	event = stdscr.getch()
 	if event == ord('q'): break
-	if event == ord('='): caves.ascend()
-	if event == ord('-'): caves.descend()
+	if event == ord('>'): caves.ascend()
+	if event == ord('<'): caves.descend()
 	if event == ord('h'): caves.movePlayer(-1, 0)
 	if event == ord('j'): caves.movePlayer(0, 1)
 	if event == ord('k'): caves.movePlayer(0, -1)
