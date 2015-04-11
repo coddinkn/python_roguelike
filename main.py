@@ -1,3 +1,5 @@
+#! /bin/python
+
 import curses
 from level import Level
 
@@ -7,7 +9,7 @@ curses.curs_set(0)
 stdscr.keypad(1)
 isRunning = True
 
-test = Level(20, 3, stdscr)
+test = Level(20, 5, stdscr)
 
 try:
 
