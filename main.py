@@ -9,7 +9,7 @@ curses.curs_set(0)
 stdscr.keypad(1)
 isRunning = True
 
-caves = Dungeon(60, 8, 4, stdscr)
+caves = Dungeon(60, 8, 6, stdscr)
 
 while isRunning:
 	caves.render()		

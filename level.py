@@ -127,25 +127,28 @@ class Level:
 			for y in range(self.height):
 				self.entityGrid[x][y] = ' '
 		for entity in self.entityList:
-			x = entity.x
-			y = entity.y
 			if entity.aiMovable:
 				entity.move()
+			x = entity.x
+			y = entity.y
 			if((x >= 0 and x < self.width) and (y >= 0 and y < self.height)):
 				if(self.grid[x][y] != ' '):
 					self.entityGrid[x][y] = entity.c
+				elif self.entityGrid[x][y] == 'e' or self.entityGrid[x][y] == '@':
+					if entity.aiMovable == False:
+						screen.addstr("shots fired")
 				else:
 					entity.x = entity.oldX
 					entity.y = entity.oldY
+					self.entityGrid[entity.x][entity.y] = entity.c
 					if entity.aiMovable == False:	
-						self.entityGrid[entity.x][entity.y] = entity.c
-						self.screen.addstr(self.height + 1, 0, "you cant go that way silly")
+						self.screen.addstr(self.height + 1, 0, "you can't go that way silly")
 			else:
 				entity.x = entity.oldX
 				entity.y = entity.oldY
+				self.entityGrid[entity.x][entity.y] = entity.c
 				if entity.aiMovable == False:
-					self.entityGrid[entity.x][entity.y] = entity.c
-					self.screen.addstr(self.height + 1, 0, "you cant go that way silly")
+					self.screen.addstr(self.height + 1, 0, "you can't go that way silly")
 	
 	def render(self):
 		self.update()

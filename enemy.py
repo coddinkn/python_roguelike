@@ -9,6 +9,7 @@ class Enemy:
 		self.oldY = y
 		self.aiMovable = True
 		self.c = 'e'
+		self.health = 5
 
 	def move(self):
 		self.oldX = self.x
@@ -23,4 +24,9 @@ class Enemy:
 			if(random.random() > 0.5):
 				self.y += 1
 			else:
-				self.y -= 1	
+				self.y -= 1
+				
+	def attack(self, entity):
+		random.seed()
+		if(random.random() > 0.5):
+			entity.health -= 1
